@@ -1,6 +1,6 @@
 interface Rect {
-  readonly id: string
-  color?: string
+  readonly id: string // только читаемый
+  color?: string // не обязательный параметр
   size: {
     width: number
     height: number
@@ -27,13 +27,21 @@ const rect2: Rect = {
 rect2.color = 'black'
 // rect2.id = '3232'
 
-const rect3 = {} as Rect
-const rect4 = <Rect>{}
+const rect3 = {} as Rect // в этом случае ts не проверяет наличие всех полей, и доверяет вам
+const rect4 = <Rect>{} // как и здесь
+
+// const rect5: Rect = {} // при такой записи проверка будет выполняться
+const rect6: Partial<Rect> = {
+  color: '123'
+} // а так можно указывать или не указывать поля, но нельзя использовать те поля которыx нет в interface
+
+rect1.color = 'white';
+// rect1.id = '456'; значение id изменить нельзя так-как указано readonly
 
 // =====================
 
-interface RectWithArea extends Rect {
-  getArea: () => number
+interface RectWithArea extends Rect { // наследование от другого интерфейса
+  getArea: () => number // мы добавили еще функцию, которая должна вернуть число
 }
 
 const rect5: RectWithArea = {
@@ -51,9 +59,10 @@ const rect5: RectWithArea = {
 
 interface IClock {
   time: Date
-  setTime(date: Date): void
+  setTime(date: Date): void // эта функция ничего не будет возвращать (void)
 }
 
+// класс Clock в данном случае имплиминтируется от интерфейса IClock и должен иметь все свойства и методы интерфейса IClock
 class Clock implements IClock {
   time: Date = new Date()
 
@@ -64,6 +73,7 @@ class Clock implements IClock {
 
 // =================
 
+// что-бы не указывать все свойства, мы указываем просто тип ключа, и какого типа будет значение
 interface Styles {
   [key: string]: string
 }

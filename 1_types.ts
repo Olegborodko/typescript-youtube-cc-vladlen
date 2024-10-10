@@ -14,6 +14,7 @@ const words: string[] = ['Hello', 'Typescript']
 
 // Tuple
 const contact: [string, number] = ['Vladilen', 1234567]
+const test: (string | number)[] = [1, 2, 'ssdfsdf'];
 
 // Any
 let variable: any = 42
@@ -26,6 +27,10 @@ function sayMyName(name: string): void {
   console.log(name)
 }
 sayMyName('Хайзенберг')
+
+function sayMyName2(name: string): string {
+  return 'string';
+}  
 
 // Never
 function throwError(message: string): never {
@@ -42,6 +47,7 @@ function infinite(): never {
 type Login = string
 
 const login: Login = 'admin'
+const login2: Login = 'user'
 // const login2: Login = 2
 
 type ID = string | number

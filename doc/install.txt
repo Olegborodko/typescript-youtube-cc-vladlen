@@ -1,0 +1,6 @@
+sudo npm install -g typescript
+
+компиляция
+tsc 1_types.ts
+
+создает 1_types.js

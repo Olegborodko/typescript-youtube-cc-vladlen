@@ -1,0 +1,18 @@
+const test: [string, number] = [1, 2, 'ssdfsdf']; // error
+
+const test: (string | number)[] = [1, 2, 'ssdfsdf']; //или string или number
+
+// ==================
+
+указание в конце функции void означат что функция ничего не возвращает
+function sayMyName(name: string): void {
+}  
+
+function sayMyName2(name: string): string {
+  return 'string';
+} 
+
+// ==================
+Never тип - либо функция икогда не заканчивает свое выполнение и возвращает ошибку, либо никогда не прекращается
+
+// ==================
