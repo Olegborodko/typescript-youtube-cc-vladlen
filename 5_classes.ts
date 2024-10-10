@@ -10,15 +10,16 @@ class Typescript {
   }
 }
 
-// class Car {
-//   readonly model: string
-//   readonly numberOfWheels: number = 4
-//
-//   constructor(theModel: string) {
-//     this.model = theModel
-//   }
-// }
+class Car2 {
+  readonly model: string
+  readonly numberOfWheels: number = 4
 
+  constructor(theModel: string) {
+    this.model = theModel // поле можно перезаписать, хотя оно readonly, но сделать это можно только внутри конструктора
+  }
+}
+
+// класс Car полностью такой-же как и класс Car2, все остальное просто добавляет typescript при компиляции
 class Car {
   readonly numberOfWheels: number = 4
   constructor(readonly model: string) {}
@@ -29,12 +30,14 @@ class Car {
 class Animal {
   protected voice: string = ''
   public color: string = 'black'
+  // protected, public и private это модификаторы, 
+  // если не писать никакого то по умолчанию будет public
 
   constructor() {
     this.go()
   }
 
-  private go() {
+  private go() { // модификаторы можно задавать функциям
     console.log('Go')
   }
 }
@@ -52,6 +55,8 @@ console.log(cat.color)
 
 // =====================
 
+// абстрактные классы, нужны для того что-бы от них наследоваться,
+// по сути они для того что-бы указать какие методы обязательно должны присутствовать у наследуемые классов
 abstract class Component {
   abstract render(): void
   abstract info(): string
