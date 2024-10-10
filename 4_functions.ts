@@ -6,6 +6,9 @@ function toUpperCase(str: string): string {
   return str.trim().toUpperCase()
 }
 
+// здесь указывается разрешения на то какие могут быть функции
+// тоесть перегрузка для функции
+
 interface MyPosition {
   x: number | undefined
   y: number | undefined
@@ -15,20 +18,20 @@ interface MyPositionWithDefault extends MyPosition {
   default: string
 }
 
-function position(): MyPosition
-function position(a: number): MyPositionWithDefault
-function position(a: number, b: number): MyPosition
+function position(): MyPosition // функция может быть без параметров
+function position(a: number): MyPositionWithDefault // содержать один параметр
+function position(a: number, b: number): MyPosition // либа два параметра
 
-function position(a?: number, b?: number) {
-  if (!a && !b) {
-    return {x: undefined, y: undefined}
+function position(a?: number, b?: number): MyPosition | MyPositionWithDefault {
+  if (a === undefined && b === undefined) {
+    return { x: undefined, y: undefined };
   }
 
-  if (a && !b) {
-    return {x: a, y: undefined, default: a.toString()}
+  if (a !== undefined && b === undefined) {
+    return { x: a, y: undefined, default: a.toString() };
   }
 
-  return {x: a, y: b}
+  return { x: a, y: b };
 }
 
 console.log('Empty: ', position())
